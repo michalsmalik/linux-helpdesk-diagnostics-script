@@ -1,0 +1,24 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ShellCheck
+        run: shellcheck diag.sh
+      - name: Help works
+        run: ./diag.sh --help
+      - name: Unknown option exits with 2
+        run: ./diag.sh --nope || test $? -eq 2
+      - name: Full run (offline, so the result doesn't depend on internet access)
+        run: ./diag.sh --offline
+      - name: No network is detected as a failure
+        run: |
+          set +e
+          sudo unshare -n ./diag.sh --offline > report.txt
+          code=$?
+          cat report.txt
+          test "$code" -eq 1 && grep -q "no default gateway" report.txt

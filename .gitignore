@@ -1,0 +1,3 @@
+# saved reports can contain hostnames, IP addresses and user names
+report*.txt
+*.log
