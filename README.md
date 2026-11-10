@@ -69,3 +69,7 @@ unshare -rn ./diag.sh    # expect: no gateway, DNS failure, exit code 1
 ## License
 
 [MIT](LICENSE)
+
+## AI usage
+
+This project was created with the help of AI. The code, tests and documentation were written with [Claude Code](https://claude.com/claude-code) (Anthropic), then reviewed, run and verified by me.
